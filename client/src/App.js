@@ -9,6 +9,9 @@ import RequestPasswordReset from './components/RequestPasswordReset';
 import ResetPassword from './components/ResetPassword';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import SubmitLink from './components/SubmitLink';
+import ManageLinks from './components/ManageLinks';
+import UserDashboard from './components/UserDashboard';
 
 
 const App = () => {
@@ -22,6 +25,9 @@ const App = () => {
         <Route path="/login" component={Login} />
         <Route path="/request-password-reset" component={RequestPasswordReset} />
         <Route path="/reset-password" component={ResetPassword} />
+        <Route path="/submit-link" component={SubmitLink} />
+        <Route path="/manage-links" component={ManageLinks} />
+        <Route path="/dashboard" component={UserDashboard} />
       </Switch>
     </Router>
   );

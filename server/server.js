@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./src/routes/authRoutes');
+const linkRoutes = require('./src/routes/linkRoutes'); // Import linkRoutes
+
 
 dotenv.config();
 
@@ -32,6 +34,7 @@ mongoose.connection.on('error', (err) => {
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/links', linkRoutes); // Use linkRoutes for /links endpoint
 
 // Start the server
 app.listen(PORT, () => {
