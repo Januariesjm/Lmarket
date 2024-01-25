@@ -12,6 +12,6 @@ router.post('/verify-email', authController.verifyEmail);
 router.post('/login', authController.login);
 router.post('/request-password-reset', authController.requestPasswordReset);
 router.post('/reset-password', authController.resetPassword);
-router.patch('/profile', authMiddleware.authenticateUser, userController.updateUserProfile);
+router.patch('/profile', userController.updateUserProfile);
 
 module.exports = router;

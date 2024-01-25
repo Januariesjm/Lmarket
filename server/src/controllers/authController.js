@@ -167,6 +167,20 @@ const authController = {
       res.status(500).json({ message: 'Internal server error' });
     }
   },
+  authenticateUser: (req, res) => {
+    try {
+      const token = req.headers.authorization.split(' ')[1];
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+      // Add user information to the request object
+      req.user = { _id: decodedToken.id };
+
+      return decodedToken.id;
+    } catch (error) {
+      console.error(error);
+      res.status(401).json({ message: 'Unauthorized' });
+    }
+  },
 };
 
 module.exports = authController;
