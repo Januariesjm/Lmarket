@@ -2,6 +2,8 @@
 
 const express = require('express');
 const authController = require('../controllers/authController');
+const authMiddleware = require('../middleware/authMiddleware');
+const userController = require('../controllers/userController')
 
 const router = express.Router();
 
@@ -10,5 +12,6 @@ router.post('/verify-email', authController.verifyEmail);
 router.post('/login', authController.login);
 router.post('/request-password-reset', authController.requestPasswordReset);
 router.post('/reset-password', authController.resetPassword);
+router.patch('/profile', authMiddleware.authenticateUser, userController.updateUserProfile);
 
 module.exports = router;

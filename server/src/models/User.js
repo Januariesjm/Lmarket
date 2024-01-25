@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   verificationOTP: { type: String },
   resetPasswordToken: { type: String },
   resetPasswordExpires: { type: Date },
+  profileImage: { type: String }, // New field for profile image
 });
 
 const User = mongoose.model('User', userSchema);

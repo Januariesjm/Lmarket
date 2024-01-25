@@ -1,7 +1,8 @@
 // src/App.js
-
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './components/Register';
 import VerifyEmail from './components/VerifyEmail';
 import Login from './components/Login';
@@ -11,24 +12,28 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import SubmitLink from './components/SubmitLink';
 import ManageLinks from './components/ManageLinks';
-import UserDashboard from './components/UserDashboard';
-
+import Dashboard from './components/Dashboard';
+import LinksList from "./components/LinksList";
+import UserProfile from './components/UserProfile';
 
 const App = () => {
   return (
     <Router>
-       <Navbar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/register" component={Register} />
-        <Route path="/verify-email" component={VerifyEmail} />
-        <Route path="/login" component={Login} />
-        <Route path="/request-password-reset" component={RequestPasswordReset} />
-        <Route path="/reset-password" component={ResetPassword} />
-        <Route path="/submit-link" component={SubmitLink} />
-        <Route path="/manage-links" component={ManageLinks} />
-        <Route path="/dashboard" component={UserDashboard} />
-      </Switch>
+  
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/request-password-reset" element={<RequestPasswordReset />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/submit-link" element={<SubmitLink />} />
+        <Route path="/manage-links" element={<ManageLinks />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/links-list" element={<LinksList />} />
+        <Route path="/user-profile" element={<UserProfile/>} />
+      </Routes>
+       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </Router>
   );
 };

@@ -59,13 +59,13 @@ const authController = {
       }
 
       // Check if OTP is correct
-      if (user.verificationToken !== otp) {
+      if (user.verificationOTP !== otp) {
         return res.status(400).json({ message: 'Incorrect OTP' });
       }
 
       // Check if OTP is expired (You may need to adjust your expiry logic)
       const currentTimestamp = Date.now();
-      const otpTimestamp = user.verificationTokenTimestamp;
+      const otpTimestamp = user.verificationOTPTimestamp;
       const otpExpiry = 5 * 60 * 1000; // 5 minutes (adjust as needed)
 
       if (currentTimestamp - otpTimestamp > otpExpiry) {
@@ -74,8 +74,8 @@ const authController = {
 
       // Update user's status and remove verification token
       user.isVerified = true;
-      user.verificationToken = undefined;
-      user.verificationTokenTimestamp = undefined;
+      user.verificationOTP = undefined;
+      user.verificationOTPTimestamp = undefined;
       await user.save();
 
       res.status(200).json({ message: 'Email verification successful. You can now login.' });

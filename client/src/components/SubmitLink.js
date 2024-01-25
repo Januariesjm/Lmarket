@@ -1,43 +1,44 @@
-// src/components/SubmitLink.js
+// LinkSubmission.js
 
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom'
 
-const SubmitLink = () => {
+const LinkSubmission = () => {
   const [link, setLink] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleLinkSubmission = async () => {
     try {
-      // Send the link to the backend for processing
+      // You may want to add authentication token to the request headers if needed
       const response = await axios.post('http://localhost:3001/links/submit', { link });
 
-      // Display success message using toast
       toast.success(response.data.message);
-      setLink(''); // Clear the input after submission
+      navigate('/dashboard');
     } catch (error) {
-      // Display error message using toast
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || 'Link submission failed');
     }
   };
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 max-w-md p-4 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-4">Submit Link</h2>
-      <div className="flex">
-        <input
-          type="text"
-          placeholder="Enter your link"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-          className="mr-2 p-2 border border-gray-300"
-        />
-        <button onClick={handleSubmit} className="p-2 bg-blue-500 text-white">
-          Submit
-        </button>
-      </div>
+      <input
+        className="w-full mb-4 p-2 border border-gray-300 rounded-md"
+        type="url"
+        placeholder="Enter your link"
+        value={link}
+        onChange={(e) => setLink(e.target.value)}
+      />
+      <button
+        className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+        onClick={handleLinkSubmission}
+      >
+        Submit Link
+      </button>
     </div>
   );
 };
 
-export default SubmitLink;
+export default LinkSubmission;

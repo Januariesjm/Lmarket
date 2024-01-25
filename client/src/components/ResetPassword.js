@@ -11,7 +11,7 @@ const ResetPassword = ({ history }) => {
 
   const handleResetPassword = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/src/auth/reset-password', { token, password });
+      const response = await axios.post('http://localhost:3001/auth/reset-password', { token, password });
       toast.success(response.data.message);
       history.push('/login');
     } catch (error) {
